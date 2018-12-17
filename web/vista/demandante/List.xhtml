@@ -44,13 +44,13 @@
                         
                         
                         
-                        <p:column headerText="#{vista.ListDemandanteTitle_dnidnte}">
+                        <p:column filterBy="#{item.dnidnte}" filterMatchMode="contains" headerText="#{vista.ListDemandanteTitle_dnidnte}">
                             <h:outputText value="#{item.dnidnte}"/>
                         </p:column>
-                        <p:column headerText="#{vista.ListDemandanteTitle_nombdnte}">
+                        <p:column filterBy="#{item.nombdnte}" filterMatchMode="contains" headerText="#{vista.ListDemandanteTitle_nombdnte}">
                             <h:outputText value="#{item.nombdnte}"/>
                         </p:column>
-                        <p:column headerText="APELLIDOS">
+                        <p:column filterBy="#{item.apepdnte} #{item.apemdnte}" filterMatchMode="contains" headerText="APELLIDOS">
                             <h:outputText value="#{item.apepdnte} #{item.apemdnte}"/>
                         </p:column>
                         <p:column headerText="#{vista.ListDemandanteTitle_celdnte}">
