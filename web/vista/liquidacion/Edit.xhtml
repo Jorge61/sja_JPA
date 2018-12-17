@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LiquidacionEditDlg" closeOnEscape="true"  draggable="false"  widgetVar="LiquidacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.EditLiquidacionTitle}">
+            <h:form id="LiquidacionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{liquidacionController.selected != null}">
+                        <p:outputLabel value="#{vista.EditLiquidacionLabel_fecinicio}" for="fecinicio" />
+                        <p:calendar id="fecinicio" pattern="MM/dd/yyyy" value="#{liquidacionController.selected.fecinicio}" title="#{vista.EditLiquidacionTitle_fecinicio}"  showOn="button"/>
+                        <p:outputLabel value="#{vista.EditLiquidacionLabel_fecfin}" for="fecfin" />
+                        <p:calendar id="fecfin" pattern="MM/dd/yyyy" value="#{liquidacionController.selected.fecfin}" title="#{vista.EditLiquidacionTitle_fecfin}"  showOn="button"/>
+                        <p:outputLabel value="#{vista.EditLiquidacionLabel_montoliq}" for="montoliq" />
+                        <p:inputText id="montoliq" value="#{liquidacionController.selected.montoliq}" title="#{vista.EditLiquidacionTitle_montoliq}" maxlength="5" >
+                            <p:keyFilter regEx="/[\0-9\-]/"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditLiquidacionLabel_fecreg}" for="fecreg" />
+                        <p:calendar id="fecreg" pattern="MM/dd/yyyy" value="#{liquidacionController.selected.fecreg}" title="#{vista.EditLiquidacionTitle_fecreg}"  showOn="button"/>
+                        <p:outputLabel value="#{vista.EditLiquidacionLabel_codexp}" for="codexp" />
+                        <p:selectOneMenu id="codexp" value="#{liquidacionController.selected.codexp}" required="true" requiredMessage="#{vista.EditLiquidacionRequiredMessage_codexp}">
+                            <f:selectItem itemLabel="#{vista.SelectOneMessage}"/>
+                            <f:selectItems value="#{expedienteController.itemsAvailableSelectOne}"
+                                           var="codexpItem"
+                                           itemValue="#{codexpItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton style="margin-right: 10px;" actionListener="#{liquidacionController.update}" value="#{vista.Save}" update="display,:LiquidacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LiquidacionEditDialog');"/>
+                    <p:commandButton style="margin-right: 10px;" value="#{vista.Cancel}" onclick="LiquidacionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

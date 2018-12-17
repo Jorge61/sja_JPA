@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:param name="active_tablas" value="active"/>
+
+        <ui:define name="title">
+            <h:outputText value="Demandante"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="DemandanteListForm">
+                <p:panel header="Lista de Demandantes" class="text-center">
+                    <p:dataTable id="datalist" value="#{demandanteController.items}" var="item"
+                                 selectionMode="single" selection="#{demandanteController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.coddnte}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <f:facet name="header">
+                            <p:commandButton value="XLS" ajax="false" class="success-btn space" icon="fa fa-file-excel-o">
+                                <p:dataExporter type="xls" target="datalist" fileName="Demandantes" />
+                            </p:commandButton>
+
+                            <p:commandButton value="PDF" ajax="false" class="danger-btn space" icon="fa fa-file-pdf-o">
+                                <p:dataExporter type="pdf" target="datalist" fileName="Demandantes"/>
+                            </p:commandButton>
+
+                            <p:commandButton value="CSV" ajax="false" class="success-btn" icon="fa fa-table">
+                                <p:dataExporter type="csv" target="datalist" fileName="Demandantes" />
+                            </p:commandButton>
+                        </f:facet>
+                        
+                        
+                        
+                        
+                        <p:column headerText="#{vista.ListDemandanteTitle_dnidnte}">
+                            <h:outputText value="#{item.dnidnte}"/>
+                        </p:column>
+                        <p:column headerText="#{vista.ListDemandanteTitle_nombdnte}">
+                            <h:outputText value="#{item.nombdnte}"/>
+                        </p:column>
+                        <p:column headerText="APELLIDOS">
+                            <h:outputText value="#{item.apepdnte} #{item.apemdnte}"/>
+                        </p:column>
+                        <p:column headerText="#{vista.ListDemandanteTitle_celdnte}">
+                            <h:outputText value="#{item.celdnte}"/>
+                        </p:column>
+                        <p:column headerText="#{vista.ListDemandanteTitle_dirdnte}">
+                            <h:outputText value="#{item.dirdnte}"/>
+                        </p:column>
+                        <p:column headerText="#{vista.ListDemandanteTitle_codubi}">
+                            <h:outputText value="#{item.codubi.dptoubi.concat(', ').concat(item.codubi.provubi).concat(', ').concat(item.codubi.distubi)}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton style="margin-right: 10px;" id="createButton" icon="fa fa-plus"   value="#{vista.Create}" actionListener="#{demandanteController.prepareCreate}" update=":DemandanteCreateForm" oncomplete="PF('DemandanteCreateDialog').show()"/>
+                            <p:commandButton style="margin-right: 10px;" id="viewButton"   icon="fa fa-eye" value="#{vista.View}" update=":DemandanteViewForm" oncomplete="PF('DemandanteViewDialog').show()" disabled="#{empty demandanteController.selected}"/>
+                            <p:commandButton style="margin-right: 10px;" id="editButton"   icon="fa fa-pencil" value="#{vista.Edit}" update=":DemandanteEditForm" oncomplete="PF('DemandanteEditDialog').show()" disabled="#{empty demandanteController.selected}"/>
+                            <p:commandButton style="margin-right: 10px;" id="deleteButton" icon="fa fa-trash"  value="#{vista.Delete}" actionListener="#{demandanteController.destroy}" update=":growl,datalist" disabled="#{empty demandanteController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

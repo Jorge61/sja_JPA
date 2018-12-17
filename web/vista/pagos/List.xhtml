@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:param name="active_tablas" value="active"/>
+
+        <ui:define name="title">
+            <h:outputText value="Pagos"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PagosListForm">
+                <p:panel header="Lista de Pagos" class="text-center">
+                    <p:dataTable id="datalist" value="#{pagosController.items}" var="item"
+                                 selectionMode="single" selection="#{pagosController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.codpag}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <!--                        <p:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText value="{vista.ListPagosTitle_codpag}"/>
+                                                    </f:facet>
+                                                    <h:outputText value="{item.codpag}"/>
+                                                </p:column>-->
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{vista.ListPagosTitle_fecpago}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecpago}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{vista.ListPagosTitle_montpago}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.montpago}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{vista.ListPagosTitle_fecreg}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecreg}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{vista.ListPagosTitle_codliq}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codliq}"/>
+                        </p:column>
+                       
+                        <f:facet name="footer">
+                            <p:commandButton style="margin-right: 10px;" id="createButton" icon="fa fa-plus"   value="#{vista.Create}" actionListener="#{pagosController.prepareCreate}" update=":PagosCreateForm" oncomplete="PF('PagosCreateDialog').show()"/>
+                            <p:commandButton style="margin-right: 10px;" id="viewButton"   icon="fa fa-eye" value="#{vista.View}" update=":PagosViewForm" oncomplete="PF('PagosViewDialog').show()" disabled="#{empty pagosController.selected}"/>
+                            <p:commandButton style="margin-right: 10px;" id="editButton"   icon="fa fa-pencil" value="#{vista.Edit}" update=":PagosEditForm" oncomplete="PF('PagosEditDialog').show()" disabled="#{empty pagosController.selected}"/>
+                            <p:commandButton style="margin-right: 10px;" id="deleteButton" icon="fa fa-trash"  value="#{vista.Delete}" actionListener="#{pagosController.destroy}" update=":growl,datalist" disabled="#{empty pagosController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

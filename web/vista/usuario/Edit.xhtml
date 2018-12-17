@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioEditDlg" closeOnEscape="true" draggable="false"  widgetVar="UsuarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.EditUsuarioTitle}">
+            <h:form id="UsuarioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <p:outputLabel value="#{vista.EditUsuarioLabel_nombusu}" for="nombusu" />
+                        <p:inputText id="nombusu" value="#{usuarioController.selected.nombusu}" title="#{vista.EditUsuarioTitle_nombusu}" />
+                        <p:outputLabel value="#{vista.EditUsuarioLabel_apeusu}" for="apeusu" />
+                        <p:inputText id="apeusu" value="#{usuarioController.selected.apeusu}" title="#{vista.EditUsuarioTitle_apeusu}" />
+                        <p:outputLabel value="#{vista.EditUsuarioLabel_dirusu}" for="dirusu" />
+                        <p:inputText id="dirusu" value="#{usuarioController.selected.dirusu}" title="#{vista.EditUsuarioTitle_dirusu}" />
+                        <p:outputLabel value="#{vista.EditUsuarioLabel_celusu}" for="celusu" />
+                        <p:inputText id="celusu" value="#{usuarioController.selected.celusu}" title="#{vista.EditUsuarioTitle_celusu}" />
+                        <p:outputLabel value="#{vista.EditUsuarioLabel_usuusu}" for="usuusu" />
+                        <p:inputText id="usuusu" value="#{usuarioController.selected.usuusu}" title="#{vista.EditUsuarioTitle_usuusu}" />
+                        <p:outputLabel value="#{vista.EditUsuarioLabel_estusu}" for="estusu" />
+                        <p:inputText id="estusu" value="#{usuarioController.selected.estusu}" title="#{vista.EditUsuarioTitle_estusu}" />
+                        <p:outputLabel value="#{vista.EditUsuarioLabel_codubi}" for="codubi" />
+                        <p:selectOneMenu id="codubi" value="#{usuarioController.selected.codubi}" >
+                            <f:selectItem itemLabel="#{vista.SelectOneMessage}"/>
+                            <f:selectItems value="#{ubigeoController.itemsAvailableSelectOne}"
+                                           var="codubiItem"
+                                           itemValue="#{codubiItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton style="margin-right: 10px;" actionListener="#{usuarioController.update}" value="#{vista.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>
+                    <p:commandButton style="margin-right: 10px;" value="#{vista.Cancel}" onclick="UsuarioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

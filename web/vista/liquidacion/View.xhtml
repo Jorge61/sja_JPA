@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LiquidacionViewDlg" widgetVar="LiquidacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.ViewLiquidacionTitle}">
+            <h:form id="LiquidacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{liquidacionController.selected != null}">
+                        <h:outputText value="#{vista.ViewLiquidacionLabel_codliq}"/>
+                        <h:outputText value="#{liquidacionController.selected.codliq}" title="#{vista.ViewLiquidacionTitle_codliq}"/>
+                        <h:outputText value="#{vista.ViewLiquidacionLabel_fecinicio}"/>
+                        <h:outputText value="#{liquidacionController.selected.fecinicio}" title="#{vista.ViewLiquidacionTitle_fecinicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{vista.ViewLiquidacionLabel_fecfin}"/>
+                        <h:outputText value="#{liquidacionController.selected.fecfin}" title="#{vista.ViewLiquidacionTitle_fecfin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{vista.ViewLiquidacionLabel_montoliq}"/>
+                        <h:outputText value="#{liquidacionController.selected.montoliq}" title="#{vista.ViewLiquidacionTitle_montoliq}"/>
+                        <h:outputText value="#{vista.ViewLiquidacionLabel_fecreg}"/>
+                        <h:outputText value="#{liquidacionController.selected.fecreg}" title="#{vista.ViewLiquidacionTitle_fecreg}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{vista.ViewLiquidacionLabel_codexp}"/>
+                        <h:outputText value="#{liquidacionController.selected.codexp}" title="#{vista.ViewLiquidacionTitle_codexp}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{vista.Close}" onclick="LiquidacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

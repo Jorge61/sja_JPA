@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandanteEditDlg" draggable="false" closeOnEscape="true" widgetVar="DemandanteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.EditDemandanteTitle}">
+            <h:form id="DemandanteEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandanteController.selected != null}">
+                        <p:outputLabel value="#{vista.EditDemandanteLabel_dnidnte}" for="dnidnte" />
+                        <p:inputText id="dnidnte" value="#{demandanteController.selected.dnidnte}" title="#{vista.EditDemandanteTitle_dnidnte}" maxlength="8" style="width: 50%">
+                            <p:keyFilter regEx="/[\0-9\-]/"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandanteLabel_nombdnte}" for="nombdnte" />
+                        <p:inputText id="nombdnte" value="#{demandanteController.selected.nombdnte}" title="#{vista.EditDemandanteTitle_nombdnte}" maxlength="50" style="width: 50%">
+                            <p:keyFilter regEx='/[\a-z ]/i'/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandanteLabel_apepdnte}" for="apepdnte" />
+                        <p:inputText id="apepdnte" value="#{demandanteController.selected.apepdnte}" title="#{vista.EditDemandanteTitle_apepdnte}" maxlength="60" style="width: 50%">
+                            <p:keyFilter regEx='/[\a-z ]/i'/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandanteLabel_apemdnte}" for="apemdnte" />
+                        <p:inputText id="apemdnte" value="#{demandanteController.selected.apemdnte}" title="#{vista.EditDemandanteTitle_apemdnte}" maxlength="60"  style="width: 50%" >
+                            <p:keyFilter regEx='/[\a-z ]/i'/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandanteLabel_celdnte}" for="celdnte" />
+                        <p:inputText id="celdnte" value="#{demandanteController.selected.celdnte}" title="#{vista.EditDemandanteTitle_celdnte}"  maxlength="9" style="width: 50%" >
+                            <p:keyFilter regEx="/[\0-9\-]/"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandanteLabel_dirdnte}" for="dirdnte" />
+                        <p:inputText id="dirdnte" value="#{demandanteController.selected.dirdnte}" title="#{vista.EditDemandanteTitle_dirdnte}" maxlength="60" style="width: 50%"/>
+                        <p:outputLabel value="#{vista.EditDemandanteLabel_codubi}" for="codubi" />
+                        <p:selectOneMenu id="codubi" value="#{demandanteController.selected.codubi}" >
+                            <f:selectItem itemLabel="Seleccione Ubigeo:"/>
+                            <f:selectItems value="#{ubigeoController.itemsAvailableSelectOne}"
+                                           var="codubiItem"
+                                           itemLabel="#{codubiItem.dptoubi}, #{codubiItem.provubi}, #{codubiItem.distubi}"
+                                           itemValue="#{codubiItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton style="margin-right: 10px;" actionListener="#{demandanteController.update}" value="#{vista.Save}" update="display,:DemandanteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandanteEditDialog');"/>
+                    <p:commandButton style="margin-right: 10px;" value="#{vista.Cancel}" onclick="DemandanteEditDialog.hide()" class="secondary-button"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

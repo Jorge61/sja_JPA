@@ -1,0 +1,51 @@
+
+:root {
+    /*--Paleta de colores--*/
+    /* primary color */
+    --color-primary: #1976D2;
+    --color-primary-dark: #004BA0;
+    --color-primary-light: #2196F3;
+    --color-primary-box-shadow: rgba(0, 123, 255, .5);
+    /* secondary color */
+    --color-secondary: #E0E0E0;
+    --color-secondary-dark: #BDBDBD;
+    --color-secondary-light: #F5F5F5;
+    --color-secondary-box-shadow: rgba(108, 117, 125, .5);
+    /* success color */
+    --color-success: #388E3C;
+    --color-success-dark: #2E7D32;
+    --color-success-light: #4CAF50;
+    --color-success-box-shadow: rgba(40, 167, 69, .5);
+    /* warning-color */
+    --color-warning: #FFA000;
+    --color-warning-dark: #FF8F00;
+    --color-warning-light: #FFC107;
+    --color-warning-box-shadow: rgba(255, 193, 7, .5);
+    /* help color */
+    --color-help: #00796B;
+    --color-help-dark: #00695C;
+    --color-help-light: #009688;
+    --color-help-box-shadow: rgba(1, 121, 108, .5);
+    /* danger color */
+    --color-danger: #E64A19;
+    --color-danger-dark: #D84315;
+    --color-danger-light: #FF5722;
+    --color-danger-box-shadow: rgba(220, 53, 69, .5);
+    /*--User interface--*/
+    --ui-border-color: var(--color-primary);
+    --ui-hover-background-color: var(--color-primary-light);
+    --ui-hover-font-color: #ffffff;
+    --ui-state-error: var(--color-danger);
+    --ui-font-family: Roboto;
+    --ui-color-header: var(--color-primary);
+    --ui-progress-color: #f7b32d;
+    /* message color */
+    --ui-message-color-info: var(--color-primary);
+    --ui-message-font-info: #ffffff;
+    --ui-message-color-warn: var(--color-warning);
+    --ui-message-font-warn: #000000;
+    --ui-message-color-error: var(--color-danger);
+    --ui-message-font-error: #ffffff;
+    --ui-message-color-fatal: var(--color-secondary-dark);
+    --ui-message-font-fatal: #000000;
+}

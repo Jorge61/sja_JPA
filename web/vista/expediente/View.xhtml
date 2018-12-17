@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ExpedienteViewDlg" widgetVar="ExpedienteViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Vista de expediente">
+            <h:form id="ExpedienteViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{expedienteController.selected != null}">
+                        <h:outputText value="#{vista.ViewExpedienteLabel_fecnotif}"/>
+                        <h:outputText value="#{expedienteController.selected.fecnotif}" title="#{vista.ViewExpedienteTitle_fecnotif}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{vista.ViewExpedienteLabel_interes}"/>
+                        <h:outputText value="#{expedienteController.selected.interes} %" title="#{vista.ViewExpedienteTitle_interes}"/>
+                        <h:outputText value="#{vista.ViewExpedienteLabel_nroexp}"/>
+                        <h:outputText value="#{expedienteController.selected.nroexp}" title="#{vista.ViewExpedienteTitle_nroexp}"/>
+                        <h:outputText value="#{vista.ViewExpedienteLabel_coddado}"/>
+                        <h:outputText value="#{expedienteController.selected.coddado.nombdado} #{expedienteController.selected.coddado.apepdado} #{expedienteController.selected.coddado.apemdado}" title="#{vista.ViewExpedienteTitle_coddado}"/>
+                        <h:outputText value="#{vista.ViewExpedienteLabel_coddnte}"/>
+                        <h:outputText value="#{expedienteController.selected.coddnte.nombdnte} #{expedienteController.selected.coddnte.apepdnte} #{expedienteController.selected.coddnte.apemdnte}" title="#{vista.ViewExpedienteTitle_coddnte}"/>
+                        <h:outputText value="#{vista.ViewExpedienteLabel_codjuz}"/>
+                        <h:outputText value="#{expedienteController.selected.codjuz.nombjuz}" title="#{vista.ViewExpedienteTitle_codjuz}"/>
+                        <h:outputText value="#{vista.ViewExpedienteLabel_codusu}"/>
+                        <h:outputText value="#{expedienteController.selected.codusu.nombusu} #{expedienteController.selected.codusu.apeusu}" title="#{vista.ViewExpedienteTitle_codusu}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{vista.Close}" onclick="PF('ExpedienteViewDialog').hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

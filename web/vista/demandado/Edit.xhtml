@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandadoEditDlg" draggable="false" widgetVar="DemandadoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.EditDemandadoTitle}" closeOnEscape="true">
+            <h:form id="DemandadoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandadoController.selected != null}">
+                        <p:outputLabel value="#{vista.EditDemandadoLabel_dnidado}" for="dnidado" />
+                        <p:inputText id="dnidado" value="#{demandadoController.selected.dnidado}" title="#{vista.EditDemandadoTitle_dnidado}" maxlength="8" style="width: 50%">
+                            <p:keyFilter regEx="/[\0-9\-]/"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandadoLabel_nombdado}" for="nombdado" />
+                        <p:inputText id="nombdado" value="#{demandadoController.selected.nombdado}" title="#{vista.EditDemandadoTitle_nombdado}" maxlength="50" style="width: 50%">
+                            <p:keyFilter regEx="/[\a-z\-]/"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandadoLabel_apepdado}" for="apepdado" />
+                        <p:inputText id="apepdado" value="#{demandadoController.selected.apepdado}" title="#{vista.EditDemandadoTitle_apepdado}" maxlength="70" style="width: 50%" >
+                            <p:keyFilter regEx="/[\a-z\-]/"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandadoLabel_apemdado}" for="apemdado" />
+                        <p:inputText id="apemdado" value="#{demandadoController.selected.apemdado}" title="#{vista.EditDemandadoTitle_apemdado}" maxlength="70" style="width: 50%">
+                            <p:keyFilter regEx="/[\a-z\-]/"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandadoLabel_celdado}" for="celdado" />
+                        <p:inputText id="celdado" value="#{demandadoController.selected.celdado}" title="#{vista.EditDemandadoTitle_celdado}" maxlength="9" style="width: 50%">
+                            <p:keyFilter regEx="/[\0-9\-]/"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandadoLabel_dirdado}" for="dirdado" />
+                        <p:inputText id="dirdado" value="#{demandadoController.selected.dirdado}" title="#{vista.EditDemandadoTitle_dirdado}" maxlength="60" style="width: 50%"/>
+                        <p:outputLabel value="#{vista.EditDemandadoLabel_sueldado}" for="sueldado" />
+                        <p:inputText id="sueldado" value="#{demandadoController.selected.sueldado}" title="#{vista.EditDemandadoTitle_sueldado}" maxlength="5" style="width: 50%">
+                            <p:keyFilter regEx="/[\0-9\-]/"/>
+                        </p:inputText>
+                        <p:outputLabel value="#{vista.EditDemandadoLabel_codubi}" for="codubi" />
+                        <p:selectOneMenu id="codubi" value="#{demandadoController.selected.codubi}" >
+                            <f:selectItem itemLabel="Seleccione Ubigeo:"/>
+                            <f:selectItems value="#{ubigeoController.itemsAvailableSelectOne}"
+                                           var="codubiItem"
+                                           itemLabel="#{codubiItem.dptoubi}, #{codubiItem.provubi}, #{codubiItem.distubi}"
+                                           itemValue="#{codubiItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton style="margin-right: 10px;" actionListener="#{demandadoController.update}" value="#{vista.Save}" update="display,:DemandadoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DemandadoEditDialog'"/>
+                    <p:commandButton style="margin-right: 10px;" value="#{vista.Cancel}" onclick="DemandadoEditDialog.hide()" class="secondary-button"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

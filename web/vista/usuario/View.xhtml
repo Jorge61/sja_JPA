@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioViewDlg" widgetVar="UsuarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.ViewUsuarioTitle}">
+            <h:form id="UsuarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <h:outputText value="#{vista.ViewUsuarioLabel_nombusu}"/>
+                        <h:outputText value="#{usuarioController.selected.nombusu}" title="#{vista.ViewUsuarioTitle_nombusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_apeusu}"/>
+                        <h:outputText value="#{usuarioController.selected.apeusu}" title="#{vista.ViewUsuarioTitle_apeusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_dirusu}"/>
+                        <h:outputText value="#{usuarioController.selected.dirusu}" title="#{vista.ViewUsuarioTitle_dirusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_celusu}"/>
+                        <h:outputText value="#{usuarioController.selected.celusu}" title="#{vista.ViewUsuarioTitle_celusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_usuusu}"/>
+                        <h:outputText value="#{usuarioController.selected.usuusu}" title="#{vista.ViewUsuarioTitle_usuusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_estusu}"/>
+                        <h:outputText value="#{usuarioController.selected.estusu}" title="#{vista.ViewUsuarioTitle_estusu}"/>
+                        <h:outputText value="#{vista.ViewUsuarioLabel_codubi}"/>
+                        <h:outputText value="#{usuarioController.selected.codubi}" title="#{vista.ViewUsuarioTitle_codubi}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{vista.Close}" onclick="UsuarioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

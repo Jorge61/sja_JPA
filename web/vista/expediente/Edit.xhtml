@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ExpedienteEditDlg" closeOnEscape="true"   draggable="false" widgetVar="ExpedienteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.EditExpedienteTitle}">
+            <h:form id="ExpedienteEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{expedienteController.selected != null}">
+                        <p:outputLabel value="#{vista.EditExpedienteLabel_fecnotif}" for="fecnotif" />
+                        <p:calendar id="fecnotif" pattern="MM/dd/yyyy" value="#{expedienteController.selected.fecnotif}" title="#{vista.EditExpedienteTitle_fecnotif}"  showOn="button" style="width: 50%"/>
+                        <p:outputLabel value="#{vista.EditExpedienteLabel_interes}" for="interes" />
+                        <p:inputText id="interes" value="#{expedienteController.selected.interes}" title="#{vista.EditExpedienteTitle_interes}" maxlength="1" style="width: 50%"/>
+                        <p:outputLabel value="#{vista.EditExpedienteLabel_nroexp}" for="nroexp" />
+                        <p:inputText id="nroexp" value="#{expedienteController.selected.nroexp}" title="#{vista.EditExpedienteTitle_nroexp}" maxlength="15" style="width: 50%"/>
+                        <p:outputLabel value="#{vista.EditExpedienteLabel_coddado}" for="coddado" />
+                        <p:selectOneMenu id="coddado" value="#{expedienteController.selected.coddado}" required="true" requiredMessage="#{vista.EditExpedienteRequiredMessage_coddado}">
+                            <f:selectItem itemLabel="#{vista.SelectOneMessage}"/>
+                            <f:selectItems value="#{demandadoController.itemsAvailableSelectOne}"
+                                           var="coddadoItem"
+                                           itemLabel="#{coddadoItem.nombdado} #{coddadoItem.apepdado} #{coddadoItem.apemdado}"
+                                           itemValue="#{coddadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{vista.EditExpedienteLabel_coddnte}" for="coddnte" />
+                        <p:selectOneMenu id="coddnte" value="#{expedienteController.selected.coddnte}" required="true" requiredMessage="#{vista.EditExpedienteRequiredMessage_coddnte}">
+                            <f:selectItem itemLabel="#{vista.SelectOneMessage}"/>
+                            <f:selectItems value="#{demandanteController.itemsAvailableSelectOne}"
+                                           var="coddnteItem"
+                                           itemLabel="#{coddnteItem.nombdnte} #{coddnteItem.apepdnte} #{coddnteItem.apemdnte}"
+                                           itemValue="#{coddnteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{vista.EditExpedienteLabel_codjuz}" for="codjuz" />
+                        <p:selectOneMenu id="codjuz" value="#{expedienteController.selected.codjuz}" required="true" requiredMessage="#{vista.EditExpedienteRequiredMessage_codjuz}">
+                            <f:selectItem itemLabel="#{vista.SelectOneMessage}"/>
+                            <f:selectItems value="#{juzgadoController.itemsAvailableSelectOne}"
+                                           var="codjuzItem"
+                                           itemLabel="#{codjuzItem.nombjuz}"
+                                           itemValue="#{codjuzItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{vista.EditExpedienteLabel_codusu}" for="codusu" />
+                        <p:selectOneMenu id="codusu" value="#{expedienteController.selected.codusu}" required="true" requiredMessage="#{vista.EditExpedienteRequiredMessage_codusu}">
+                            <f:selectItem itemLabel="#{vista.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="codusuItem"
+                                           itemLabel="#{codusuItem.nombusu} #{codusuItem.apeusu}"
+                                           itemValue="#{codusuItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton style="margin-right: 10px;" actionListener="#{expedienteController.update}" value="#{vista.Save}" update="display,:ExpedienteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ExpedienteEditDialog');"/>
+                    <p:commandButton style="margin-right: 10px;" value="#{vista.Cancel}" onclick="ExpedienteEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

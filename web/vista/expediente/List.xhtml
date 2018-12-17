@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:param name="active_expediente" value="active"/>
+
+        <ui:define name="title">
+            <h:outputText value="Expediente"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ExpedienteListForm">
+                <p:panel header="Expedientes" class="text-center">
+                    <p:dataTable id="datalist" value="#{expedienteController.items}" var="item"
+                                 selectionMode="single" selection="#{expedienteController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.codexp}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <f:facet name="header">
+                            <p:commandButton value="XLS" ajax="false" class="success-btn space" icon="fa fa-file-excel-o">
+                                <p:dataExporter type="xls" target="datalist" fileName="Expediente" />
+                            </p:commandButton>
+
+                            <p:commandButton value="PDF" ajax="false" class="danger-btn space" icon="fa fa-file-pdf-o">
+                                <p:dataExporter type="pdf" target="datalist" fileName="Expediente"/>
+                            </p:commandButton>
+
+                            <p:commandButton value="CSV" ajax="false" class="success-btn" icon="fa fa-table">
+                                <p:dataExporter type="csv" target="datalist" fileName="Expediente" />
+                            </p:commandButton>
+                        </f:facet>
+                        
+                                              
+                        <p:column width="5%">
+                            <p:rowToggler/>
+                        </p:column>
+
+                        <p:column filterBy="#{item.nroexp}" filterMatchMode="contains" headerText="#{vista.ListExpedienteTitle_nroexp}">
+                            <h:outputText value="#{item.nroexp}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{item.coddnte.nombdnte} #{item.coddnte.apepdnte} #{item.coddnte.apemdnte}" filterMatchMode="contains" headerText="#{vista.ListExpedienteTitle_coddnte}">
+                            <h:outputText value="#{item.coddnte.nombdnte} #{item.coddnte.apepdnte} #{item.coddnte.apemdnte}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{item.coddado.nombdado} #{item.coddado.apepdado} #{item.coddado.apemdado}" filterMatchMode="contains" headerText="#{vista.ListExpedienteTitle_coddado}">
+                            <h:outputText value="#{item.coddado.nombdado} #{item.coddado.apepdado} #{item.coddado.apemdado}"/>
+                        </p:column>
+
+                        <p:column filterBy="#{item.codjuz.nombjuz}" filterMatchMode="contains" headerText="#{vista.ListExpedienteTitle_codjuz}">
+                            <h:outputText value="#{item.codjuz.nombjuz}"/>
+                        </p:column>
+
+                        <p:column headerText="#{vista.ListExpedienteTitle_interes}">
+                            <h:outputText value="#{item.interes} %"/>
+                        </p:column>
+                        <p:rowExpansion>
+                            <h:panelGrid columns="4">
+                                <p:outputLabel value="#{vista.ListExpedienteTitle_codusu}" class="font-weight-bold"/>
+                                <h:outputText value="#{item.codusu.nombusu}, #{item.codusu.apeusu}"/>
+
+                                <p:outputLabel value="#{vista.ListExpedienteTitle_fecnotif}" class="font-weight-bold"/>
+                                <h:outputText value="#{item.fecnotif}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </h:panelGrid>
+                        </p:rowExpansion>
+                        <f:facet name="footer">
+                            <p:commandButton style="margin-right: 10px;" id="createButton" icon="fa fa-plus"   value="#{vista.Create}" actionListener="#{expedienteController.prepareCreate}" update=":ExpedienteCreateForm" oncomplete="PF('ExpedienteCreateDialog').show()"/>
+                            <p:commandButton style="margin-right: 10px;" id="viewButton"   icon="fa fa-eye" value="#{vista.View}" update=":ExpedienteViewForm" oncomplete="PF('ExpedienteViewDialog').show()" disabled="#{empty expedienteController.selected}"/>
+                            <p:commandButton style="margin-right: 10px;" id="editButton"   icon="fa fa-pencil" value="#{vista.Edit}" update=":ExpedienteEditForm" oncomplete="PF('ExpedienteEditDialog').show()" disabled="#{empty expedienteController.selected}"/>
+                            <p:commandButton style="margin-right: 10px;" id="deleteButton" icon="fa fa-trash"  value="#{vista.Delete}" actionListener="#{expedienteController.destroy}" update=":growl,datalist" disabled="#{empty expedienteController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

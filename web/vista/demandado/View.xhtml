@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandadoViewDlg" draggable="false" widgetVar="DemandadoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{vista.ViewDemandadoTitle}">
+            <h:form id="DemandadoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandadoController.selected != null}">
+                        <h:outputText value="#{vista.ViewDemandadoLabel_dnidado}"/>
+                        <h:outputText value="#{demandadoController.selected.dnidado}" title="#{vista.ViewDemandadoTitle_dnidado}"/>
+                        <h:outputText value="#{vista.ViewDemandadoLabel_nombdado}"/>
+                        <h:outputText value="#{demandadoController.selected.nombdado}" title="#{vista.ViewDemandadoTitle_nombdado}"/>
+                        <h:outputText value="#{vista.ViewDemandadoLabel_apepdado}"/>
+                        <h:outputText value="#{demandadoController.selected.apepdado}" title="#{vista.ViewDemandadoTitle_apepdado}"/>
+                        <h:outputText value="#{vista.ViewDemandadoLabel_apemdado}"/>
+                        <h:outputText value="#{demandadoController.selected.apemdado}" title="#{vista.ViewDemandadoTitle_apemdado}"/>
+                        <h:outputText value="#{vista.ViewDemandadoLabel_celdado}"/>
+                        <h:outputText value="#{demandadoController.selected.celdado}" title="#{vista.ViewDemandadoTitle_celdado}"/>
+                        <h:outputText value="#{vista.ViewDemandadoLabel_dirdado}"/>
+                        <h:outputText value="#{demandadoController.selected.dirdado}" title="#{vista.ViewDemandadoTitle_dirdado}"/>
+                        <h:outputText value="#{vista.ViewDemandadoLabel_sueldado}"/>
+                        <h:outputText value="#{demandadoController.selected.sueldado}" title="#{vista.ViewDemandadoTitle_sueldado}"/>
+                        <h:outputText value="#{vista.ViewDemandadoLabel_codubi}"/>
+                        <h:outputText value="#{demandadoController.selected.codubi.dptoubi}, #{demandadoController.selected.codubi.provubi}, #{demandadoController.selected.codubi.distubi}" title="#{vista.ViewDemandadoTitle_codubi}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{vista.Close}" onclick="DemandadoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
